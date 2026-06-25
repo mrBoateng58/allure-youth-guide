@@ -1,6 +1,40 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 export default function GetInvolved() {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: `${formData.get('firstName')} ${formData.get('lastName')}`,
+      email: formData.get('email'),
+      interest: formData.get('interest'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      setStatus("error");
+    }
+  };
+
   return (
     <div className="flex flex-col w-full">
       
@@ -72,51 +106,71 @@ export default function GetInvolved() {
             {/* Right Column: The Form */}
             <div className="bg-white p-10 rounded-2xl shadow-sm border border-gray-100">
               <h3 className="text-2xl font-bold text-text-main mb-6">Send us a Message</h3>
-              <form className="space-y-6">
-                
-                {/* Name */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-text-main mb-2">First Name</label>
-                    <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="John" />
+              
+              {status === "success" ? (
+                <div className="bg-brand-secondary/30 p-8 rounded-lg text-center border border-brand-secondary">
+                  <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4 text-white">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-text-main mb-2">Last Name</label>
-                    <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="Doe" />
+                  <h4 className="text-xl font-bold text-text-main mb-2">Message Received!</h4>
+                  <p className="text-gray-600 mb-6">Thank you for reaching out. Our team will review your inquiry and get back to you shortly.</p>
+                  <button onClick={() => setStatus("idle")} className="text-brand-primary font-bold hover:underline">
+                    Send another message
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  
+                  {/* Name */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-text-main mb-2">First Name</label>
+                      <input required name="firstName" type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="John" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-text-main mb-2">Last Name</label>
+                      <input required name="lastName" type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="Doe" />
+                    </div>
                   </div>
-                </div>
 
-                {/* Email */}
-                <div>
-                  <label className="block text-sm font-semibold text-text-main mb-2">Email Address</label>
-                  <input type="email" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="john@example.com" />
-                </div>
+                  {/* Email */}
+                  <div>
+                    <label className="block text-sm font-semibold text-text-main mb-2">Email Address</label>
+                    <input required name="email" type="email" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="john@example.com" />
+                  </div>
 
-                {/* Interest Dropdown */}
-                <div>
-                  <label className="block text-sm font-semibold text-text-main mb-2">I am interested in...</label>
-                  <select className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors text-gray-600 bg-white">
-                    <option>Joining the Students Guide</option>
-                    <option>Joining the Graduates Guide</option>
-                    <option>Joining the Work Guide</option>
-                    <option>Joining the Entrepreneur Guide</option>
-                    <option>Becoming a Mentor or Partner</option>
-                    <option>General Inquiry</option>
-                  </select>
-                </div>
+                  {/* Interest Dropdown */}
+                  <div>
+                    <label className="block text-sm font-semibold text-text-main mb-2">I am interested in...</label>
+                    <select name="interest" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors text-gray-600 bg-white">
+                      <option>Joining the Students Guide</option>
+                      <option>Joining the Graduates Guide</option>
+                      <option>Joining the Work Guide</option>
+                      <option>Joining the Entrepreneur Guide</option>
+                      <option>Becoming a Mentor or Partner</option>
+                      <option>General Inquiry</option>
+                    </select>
+                  </div>
 
-                {/* Message */}
-                <div>
-                  <label className="block text-sm font-semibold text-text-main mb-2">Message</label>
-                  <textarea rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="How can we help you?"></textarea>
-                </div>
+                  {/* Message */}
+                  <div>
+                    <label className="block text-sm font-semibold text-text-main mb-2">Message</label>
+                    <textarea required name="message" rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="How can we help you?"></textarea>
+                  </div>
 
-                {/* Submit Button */}
-                <button type="submit" className="w-full bg-brand-primary text-white font-bold py-4 rounded-lg hover:bg-opacity-90 transition-all">
-                  Submit Application
-                </button>
+                  {/* Submit Button */}
+                  <button disabled={status === "loading"} type="submit" className="w-full flex justify-center items-center bg-brand-primary text-white font-bold py-4 rounded-lg hover:bg-opacity-90 transition-all disabled:opacity-70 disabled:cursor-not-allowed">
+                    {status === "loading" ? (
+                       <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    ) : "Submit Application"}
+                  </button>
 
-              </form>
+                  {status === "error" && (
+                    <p className="text-red-500 text-sm text-center bg-red-50 p-3 rounded-md">Something went wrong. Please check your connection and try again.</p>
+                  )}
+
+                </form>
+              )}
             </div>
 
           </div>
