@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
 export async function POST(request: Request) {
   // 1. We moved this inside the function! Now it only runs at runtime, not build time.
@@ -10,8 +10,8 @@ export async function POST(request: Request) {
     const { name, email, interest, message } = body;
 
     const data = await resend.emails.send({
-      from: 'Allure Youth Guide <onboarding@resend.dev>',
-      to: 'randyboateng420@gmail.com', // Keep your actual email here
+      from: "Allure Youth Guide <onboarding@resend.dev>",
+      to: "randy.boateng420@regent.edu.gh", // Keep your actual email here
       subject: `New Inquiry: ${interest}`,
       html: `
         <h3>New Contact Submission</h3>
@@ -24,6 +24,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 },
+    );
   }
 }
