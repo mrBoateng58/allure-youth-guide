@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
     const data = await resend.emails.send({
       from: "Allure Youth Guide <onboarding@resend.dev>",
-      to: "randy.boateng420@regent.edu.gh", // Keep your actual email here
+      to: "randy.boateng@regent.edu.gh", // Keep your actual email here
       subject: `New Inquiry: ${interest}`,
       html: `
         <h3>New Contact Submission</h3>
