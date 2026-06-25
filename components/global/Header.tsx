@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,10 +15,14 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
         {/* Logo Section */}
-        <Link href="/" className="flex items-center gap-2" onClick={closeMenu}>
-          <div className="text-brand-primary font-bold text-2xl tracking-tighter">
-            A<span className="text-brand-accent">Y</span>G
-          </div>
+        <Link href="/" className="flex items-center gap-3" onClick={closeMenu}>
+          <Image 
+            src="/logo.png" 
+            alt="Allure Youth Guide Logo" 
+            width={48} 
+            height={48} 
+            className="w-12 h-12 object-contain"
+          />
           <div className="flex flex-col">
             <span className="text-text-main font-bold leading-tight">Allure Youth Guide</span>
             <span className="text-[10px] text-gray-500 font-semibold tracking-widest uppercase">Est. 2024 - Ghana</span>
