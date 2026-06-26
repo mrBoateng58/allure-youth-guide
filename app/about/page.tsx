@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 export default function AboutUs() {
   return (
@@ -117,28 +118,28 @@ export default function AboutUs() {
             
             {/* Team Member 1 */}
             <div className="text-center group">
-              <div className="w-40 h-40 mx-auto rounded-full overflow-hidden mb-6 border-4 border-brand-secondary group-hover:border-brand-primary transition-colors">
-                <img src="https://images.unsplash.com/photo-1531123897727-8f129e1bf98c?q=80&w=2070&auto=format&fit=crop" alt="Founder Placeholder" className="w-full h-full object-cover" />
+              <div className="relative w-40 h-40 mx-auto rounded-full overflow-hidden mb-6 border-4 border-brand-secondary group-hover:border-brand-primary transition-colors">
+                <Image src="https://images.unsplash.com/photo-1531123897727-8f129e1bf98c?q=80&w=2070&auto=format&fit=crop" alt="Randy Boateng" fill className="object-cover" />
               </div>
-              <h3 className="text-xl font-bold text-text-main">Ama Addo</h3>
-              <p className="text-brand-accent font-semibold mb-2">Founder & Visionary</p>
+              <h3 className="text-xl font-bold text-text-main">Randy Boateng</h3>
+              <p className="text-brand-accent font-semibold mb-2">Co-Founder & Visionary</p>
               <p className="text-sm text-gray-500 px-4">Dedicated to unlocking potential in young Ghanaians across all stages of life.</p>
             </div>
 
             {/* Team Member 2 */}
             <div className="text-center group">
-              <div className="w-40 h-40 mx-auto rounded-full overflow-hidden mb-6 border-4 border-brand-secondary group-hover:border-brand-primary transition-colors">
-                <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=1935&auto=format&fit=crop" alt="Program Director Placeholder" className="w-full h-full object-cover" />
+              <div className="relative w-40 h-40 mx-auto rounded-full overflow-hidden mb-6 border-4 border-brand-secondary group-hover:border-brand-primary transition-colors">
+                <Image src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=1935&auto=format&fit=crop" alt="Co-Founder Placeholder" fill className="object-cover" />
               </div>
-              <h3 className="text-xl font-bold text-text-main">Kwame Appiah</h3>
-              <p className="text-brand-accent font-semibold mb-2">Program Director</p>
-              <p className="text-sm text-gray-500 px-4">Oversees the curriculum and execution of the four core ecosystem pillars.</p>
+              <h3 className="text-xl font-bold text-text-main">[Business Partner Name]</h3>
+              <p className="text-brand-accent font-semibold mb-2">Co-Founder & Director</p>
+              <p className="text-sm text-gray-500 px-4">Oversees the strategic development and execution of the four core ecosystem pillars.</p>
             </div>
 
             {/* Team Member 3 */}
             <div className="text-center group">
-              <div className="w-40 h-40 mx-auto rounded-full overflow-hidden mb-6 border-4 border-brand-secondary group-hover:border-brand-primary transition-colors">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop" alt="Mentorship Lead Placeholder" className="w-full h-full object-cover" />
+              <div className="relative w-40 h-40 mx-auto rounded-full overflow-hidden mb-6 border-4 border-brand-secondary group-hover:border-brand-primary transition-colors">
+                <Image src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop" alt="Mentorship Lead Placeholder" fill className="object-cover" />
               </div>
               <h3 className="text-xl font-bold text-text-main">Serwaa Boakye</h3>
               <p className="text-brand-accent font-semibold mb-2">Mentorship Lead</p>
@@ -147,8 +148,8 @@ export default function AboutUs() {
 
             {/* Team Member 4 */}
             <div className="text-center group">
-              <div className="w-40 h-40 mx-auto rounded-full overflow-hidden mb-6 border-4 border-brand-secondary group-hover:border-brand-primary transition-colors">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Entrepreneurship Lead Placeholder" className="w-full h-full object-cover" />
+              <div className="relative w-40 h-40 mx-auto rounded-full overflow-hidden mb-6 border-4 border-brand-secondary group-hover:border-brand-primary transition-colors">
+                <Image src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Entrepreneurship Lead Placeholder" fill className="object-cover" />
               </div>
               <h3 className="text-xl font-bold text-text-main">Ekow Mensah</h3>
               <p className="text-brand-accent font-semibold mb-2">Entrepreneurship Lead</p>
